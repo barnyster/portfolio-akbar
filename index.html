@@ -1,814 +1,1079 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barnyster - Professional Event Organizer</title>
-    <!-- Font Awesome -->
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="font-sans bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-gray-900/90 backdrop-blur-md py-4 px-6 shadow-lg">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <a href="#home" class="text-2xl font-bold">
-          <span class="text-cyan-400">B</span>arny<span class="text-cyan-400">ster</span>
-        </a>
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
         
-        <div class="hidden md:flex space-x-8">
-          <a href="#home" class="hover:text-cyan-400 transition-colors duration-300">Home</a>
-          <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
-          <a href="#services" class="hover:text-cyan-400 transition-colors duration-300">Services</a>
-          <a href="#portfolio" class="hover:text-cyan-400 transition-colors duration-300">Portfolio</a>
-          <a href="#testimonials" class="hover:text-cyan-400 transition-colors duration-300">Testimonials</a>
-          <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #06b6d4, #3b82f6);
+            border-radius: 5px;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, #06b6d4 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Glass Effect */
+        .glass-effect {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Section Spacing for Fixed Nav */
+        section {
+            scroll-margin-top: 80px;
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Image Hover Effect */
+        .image-hover {
+            transition: all 0.5s ease;
+        }
+        
+        .image-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            width: 0%;
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="fixed w-full z-50 glass-effect py-4 px-6 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="text-2xl font-bold">
+                <span class="text-cyan-400">B</span>arny<span class="text-cyan-400">ster</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-cyan-400 transition-colors duration-300">Home</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
+                <a href="#services" class="hover:text-cyan-400 transition-colors duration-300">Services</a>
+                <a href="#portfolio" class="hover:text-cyan-400 transition-colors duration-300">Portfolio</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-toggle" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
         
-        <div class="md:hidden">
-          <button id="menu-toggle" class="text-2xl">
-            <i class="fas fa-bars"></i>
-          </button>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 mt-4 p-4 rounded-lg shadow-xl">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="hover:text-cyan-400 transition-colors duration-300">Home</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
+                <a href="#services" class="hover:text-cyan-400 transition-colors duration-300">Services</a>
+                <a href="#portfolio" class="hover:text-cyan-400 transition-colors duration-300">Portfolio</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
+            </div>
         </div>
-      </div>
-      
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden bg-gray-900 mt-4 p-4 rounded-lg shadow-xl">
-        <div class="flex flex-col space-y-4">
-          <a href="#home" class="hover:text-cyan-400 transition-colors duration-300">Home</a>
-          <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
-          <a href="#services" class="hover:text-cyan-400 transition-colors duration-300">Services</a>
-          <a href="#portfolio" class="hover:text-cyan-400 transition-colors duration-300">Portfolio</a>
-          <a href="#testimonials" class="hover:text-cyan-400 transition-colors duration-300">Testimonials</a>
-          <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
-        </div>
-      </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div class="lg:w-1/2">
-            <div class="mb-6">
-              <span class="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold">
-                Professional Event Organizer
-              </span>
+    <!-- ===== HERO SECTION ===== -->
+    <section id="home" class="pt-32 pb-20 px-4 md:px-6 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <!-- Left Column: Text Content -->
+                <div class="lg:w-1/2 animate-fade-in-up">
+                    <!-- Badge -->
+                    <div class="mb-6">
+                        <span class="inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold">
+                            Professional Event Organizer
+                        </span>
+                    </div>
+                    
+                    <!-- Title -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                        Hello <span class="text-yellow-400">👋</span>, I'm
+                        <span class="block gradient-text mt-2">
+                            Barnyster!!
+                        </span>
+                    </h1>
+                    
+                    <!-- Subtitle -->
+                    <h2 class="text-2xl md:text-3xl text-gray-300 mb-6">
+                        Creating <span class="font-semibold text-cyan-400">Unforgettable</span> Experiences
+                    </h2>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-400 mb-8 text-lg leading-relaxed">
+                        With over 5 years of experience in event management, I specialize in turning your visions into reality. From corporate gatherings to private celebrations, I ensure every detail is perfectly executed for memorable experiences.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 hover-lift">
+                            <i class="fas fa-phone-alt mr-2"></i> Contact Me
+                        </a>
+                        <a href="#portfolio" class="px-8 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 hover-lift">
+                            <i class="fas fa-eye mr-2"></i> View Portfolio
+                        </a>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="flex flex-wrap gap-6">
+                        <div class="text-center">
+                            <div id="eventsCounter" class="text-3xl font-bold text-cyan-400">0+</div>
+                            <div class="text-gray-400 text-sm">Events Organized</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="satisfactionCounter" class="text-3xl font-bold text-cyan-400">0%</div>
+                            <div class="text-gray-400 text-sm">Client Satisfaction</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="experienceCounter" class="text-3xl font-bold text-cyan-400">0+</div>
+                            <div class="text-gray-400 text-sm">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Image -->
+                <div class="lg:w-1/2 relative">
+                    <div class="animate-float">
+                        <div class="relative">
+                            <!-- Gradient Background Effect -->
+                            <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl opacity-20"></div>
+                            
+                            <!-- Profile Image -->
+                            <img 
+                                src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Barnyster - Professional Event Organizer"
+                                class="relative rounded-2xl shadow-2xl border-4 border-gray-800 w-full max-w-lg mx-auto image-hover"
+                            >
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 bg-cyan-500 rounded-full blur-2xl opacity-20"></div>
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-blue-500 rounded-full blur-2xl opacity-20"></div>
+                </div>
             </div>
-            
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Hello <span class="text-yellow-400">🙌</span>, I'm
-              <span class="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mt-2">
-                Barnyster!!
-              </span>
-            </h1>
-            
-            <h2 class="text-2xl md:text-3xl text-gray-300 mb-6">
-              Creating <span class="font-semibold text-cyan-400">Unforgettable</span> Experiences
-            </h2>
-            
-            <p class="text-gray-400 mb-8 text-lg leading-relaxed">
-              With over 5 years of experience in event management, I specialize in turning your visions into reality. From corporate gatherings to private celebrations, I ensure every detail is perfectly executed for memorable experiences.
-            </p>
-            
-            <div class="flex flex-wrap gap-4 mb-10">
-              <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fas fa-phone-alt mr-2"></i> Contact Me
-              </a>
-              <a href="#portfolio" class="px-8 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300">
-                <i class="fas fa-eye mr-2"></i> View Portfolio
-              </a>
-            </div>
-            
-            <div class="flex items-center space-x-6">
-              <div class="text-center">
-                <div id="eventsCounter" class="text-3xl font-bold text-cyan-400">0+</div>
-                <div class="text-gray-400 text-sm">Events Organized</div>
-              </div>
-              <div class="text-center">
-                <div id="satisfactionCounter" class="text-3xl font-bold text-cyan-400">0%</div>
-                <div class="text-gray-400 text-sm">Client Satisfaction</div>
-              </div>
-              <div class="text-center">
-                <div id="experienceCounter" class="text-3xl font-bold text-cyan-400">0+</div>
-                <div class="text-gray-400 text-sm">Years Experience</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="lg:w-1/2 relative">
-            <div class="relative z-10">
-              <div class="w-full max-w-lg mx-auto relative">
-                <div class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl opacity-30"></div>
-                <img 
-                  src="public/img/barceo.png" 
-                  alt="Barnyster - Event Organizer"
-                  class="relative rounded-2xl shadow-2xl border-4 border-gray-800 w-full h-auto"
-                  onerror="this.src='https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'"
-                >
-              </div>
-            </div>
-            
-            <div class="absolute -top-6 -right-6 w-32 h-32 bg-cyan-500 rounded-full blur-2xl opacity-20"></div>
-            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-500 rounded-full blur-2xl opacity-20"></div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- Konten -->
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">
-              About <span class="text-cyan-400">Barnyster</span>
-            </h2>
-            
-            <p class="text-gray-400 mb-6 text-lg leading-relaxed">
-              With over <span class="text-cyan-400 font-semibold">5 years of experience</span> in the event industry, I've developed a passion for creating memorable experiences that exceed expectations.
-            </p>
-            
-            <p class="text-gray-400 mb-8 text-lg leading-relaxed">
-              My approach combines <span class="text-cyan-400 font-semibold">creative vision</span> with <span class="text-cyan-400 font-semibold">meticulous planning</span>, ensuring every event is executed flawlessly from start to finish.
-            </p>
-            
-            <!-- Skills/Expertise -->
-            <div class="mb-10">
-              <h3 class="text-xl font-bold mb-4 text-white">My Expertise</h3>
-              <div class="grid grid-cols-2 gap-4">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Event Planning</span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Vendor Management</span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Budget Control</span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Creative Design</span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Team Leadership</span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3"></div>
-                  <span class="text-gray-300">Risk Management</span>
-                </div>
-              </div>
-            </div>
-            
-            <a href="#portfolio" class="inline-flex items-center px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300">
-              <i class="fas fa-eye mr-2"></i> View My Work
-            </a>
-          </div>
-          
-          <!-- Gambar/Statistik -->
-          <div class="relative">
-            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl">
-              <div class="grid grid-cols-2 gap-6 mb-8">
-                <div class="text-center p-6 bg-gray-800/50 rounded-xl">
-                  <div class="text-4xl font-bold text-cyan-400 mb-2">50+</div>
-                  <div class="text-gray-400">Events Organized</div>
-                </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-xl">
-                  <div class="text-4xl font-bold text-cyan-400 mb-2">100%</div>
-                  <div class="text-gray-400">Client Satisfaction</div>
-                </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-xl">
-                  <div class="text-4xl font-bold text-cyan-400 mb-2">5+</div>
-                  <div class="text-gray-400">Years Experience</div>
-                </div>
-                <div class="text-center p-6 bg-gray-800/50 rounded-xl">
-                  <div class="text-4xl font-bold text-cyan-400 mb-2">24/7</div>
-                  <div class="text-gray-400">Support</div>
-                </div>
-              </div>
-              
-              <div class="text-center">
-                <p class="text-gray-300 italic">
-                  "Creating unforgettable experiences is not just my job, it's my passion. Every event is a unique story waiting to be told."
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="py-20 px-4 md:px-6 bg-gray-800/30">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    About <span class="text-cyan-400">Me</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Get to know more about my journey and expertise in event management
                 </p>
-                <div class="mt-4 flex items-center justify-center">
-                  <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
-                    B
-                  </div>
-                  <div>
-                    <p class="font-semibold">Barnyster</p>
-                    <p class="text-gray-400 text-sm">Professional Event Organizer</p>
-                  </div>
-                </div>
-              </div>
             </div>
             
-            <!-- Dekorasi -->
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500 rounded-full blur-xl opacity-20"></div>
-            <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-blue-500 rounded-full blur-xl opacity-20"></div>
-          </div>
+            <!-- About Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content -->
+                <div class="animate-fade-in-up">
+                    <h3 class="text-2xl font-bold mb-6">My Story & Passion</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Hello! I'm <span class="text-cyan-400 font-semibold">Barnyster</span>, a passionate Event Organizer with over 5 years of experience creating unforgettable experiences. My journey in event management started from organizing small community gatherings to large-scale corporate events.
+                    </p>
+                    
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        I believe that every event tells a story, and my mission is to help you tell yours in the most memorable way. From concept development to execution, I handle every detail with precision and creativity.
+                    </p>
+                    
+                    <!-- Key Points -->
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-cyan-400"></i>
+                            </div>
+                            <span class="text-gray-300">Expert in wedding and corporate events</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-cyan-400"></i>
+                            </div>
+                            <span class="text-gray-300">Strong vendor network and partnerships</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-cyan-400"></i>
+                            </div>
+                            <span class="text-gray-300">Creative problem-solving skills</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-cyan-400"></i>
+                            </div>
+                            <span class="text-gray-300">Budget management expertise</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <a href="#contact" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 hover-lift">
+                        <i class="fas fa-envelope mr-2"></i> Let's Work Together
+                    </a>
+                </div>
+                
+                <!-- Right: Skills & Stats -->
+                <div class="animate-fade-in-up">
+                    <div class="glass-effect rounded-2xl p-8">
+                        <h3 class="text-xl font-bold mb-6 text-center">My Expertise</h3>
+                        
+                        <!-- Skill Bars -->
+                        <div class="space-y-6">
+                            <!-- Skill 1 -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Event Planning</span>
+                                    <span class="text-cyan-400">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gradient-to-r from-cyan-500 to-blue-600 h-2 rounded-full" data-width="95%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Skill 2 -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Vendor Management</span>
+                                    <span class="text-cyan-400">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gradient-to-r from-cyan-500 to-blue-600 h-2 rounded-full" data-width="90%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Skill 3 -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Budget Planning</span>
+                                    <span class="text-cyan-400">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gradient-to-r from-cyan-500 to-blue-600 h-2 rounded-full" data-width="88%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Skill 4 -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-gray-300">Team Leadership</span>
+                                    <span class="text-cyan-400">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="progress-bar bg-gradient-to-r from-cyan-500 to-blue-600 h-2 rounded-full" data-width="92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Grid -->
+                        <div class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-gray-700">
+                            <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                                <div class="text-2xl font-bold text-cyan-400">50+</div>
+                                <div class="text-gray-400 text-sm">Events Done</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                                <div class="text-2xl font-bold text-cyan-400">100%</div>
+                                <div class="text-gray-400 text-sm">Happy Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-800/30 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            My <span class="text-cyan-400">Services</span>
-          </h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Comprehensive event management solutions tailored to your needs
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Service 1 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl hover:bg-gray-700/50 transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
-              <i class="fas fa-calendar-alt text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3">Event Planning</h3>
-            <p class="text-gray-400 mb-4">
-              Comprehensive event planning from concept to execution with attention to every detail.
-            </p>
-            <ul class="space-y-2">
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Concept Development
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Timeline Management
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Vendor Coordination
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Service 2 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl hover:bg-gray-700/50 transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
-              <i class="fas fa-users text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3">Wedding Coordination</h3>
-            <p class="text-gray-400 mb-4">
-              Creating dream weddings with personalized themes and flawless execution.
-            </p>
-            <ul class="space-y-2">
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Theme Design
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Ceremony Planning
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Reception Management
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Service 3 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl hover:bg-gray-700/50 transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
-              <i class="fas fa-briefcase text-2xl"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3">Corporate Events</h3>
-            <p class="text-gray-400 mb-4">
-              Professional event management for businesses, conferences, and corporate gatherings.
-            </p>
-            <ul class="space-y-2">
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Conference Planning
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Team Building
-              </li>
-              <li class="flex items-center text-gray-300">
-                <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
-                Product Launches
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Recent <span class="text-cyan-400">Projects</span>
-          </h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            A showcase of successful events I've organized
-          </p>
-        </div>
-        
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <button class="filter-btn active px-6 py-2 rounded-full bg-cyan-500 text-white font-medium transition-all" data-filter="all">All Projects</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-800 text-gray-300 font-medium hover:bg-gray-700 transition-all" data-filter="wedding">Wedding</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-800 text-gray-300 font-medium hover:bg-gray-700 transition-all" data-filter="corporate">Corporate</button>
-          <button class="filter-btn px-6 py-2 rounded-full bg-gray-800 text-gray-300 font-medium hover:bg-gray-700 transition-all" data-filter="festival">Festival</button>
-        </div>
-        
-        <!-- Portfolio Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project 1 - Wedding -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="wedding">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-                <i class="fas fa-ring text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Wedding
-              </span>
-              <h3 class="text-xl font-bold mb-2">Beachfront Luxury Wedding</h3>
-              <p class="text-gray-400 mb-4">Exclusive wedding ceremony with 300 guests at a premium beach resort</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- Project 2 - Corporate -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="corporate">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
-                <i class="fas fa-briefcase text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Corporate Event
-              </span>
-              <h3 class="text-xl font-bold mb-2">Tech Innovation Summit</h3>
-              <p class="text-gray-400 mb-4">Annual technology conference with 100+ speakers and 2,000+ participants</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- Project 3 - Festival -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="festival">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-yellow-600 to-orange-600 flex items-center justify-center">
-                <i class="fas fa-music text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Music Festival
-              </span>
-              <h3 class="text-xl font-bold mb-2">Sunset Music Festival 2024</h3>
-              <p class="text-gray-400 mb-4">3-day outdoor music festival with 50+ artists and 5,000+ attendees</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- Project 4 - Wedding -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="wedding">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-pink-600 to-red-600 flex items-center justify-center">
-                <i class="fas fa-heart text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Wedding
-              </span>
-              <h3 class="text-xl font-bold mb-2">Garden Romance Wedding</h3>
-              <p class="text-gray-400 mb-4">Intimate garden wedding with floral theme for 150 guests</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- Project 5 - Corporate -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="corporate">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-green-600 to-teal-600 flex items-center justify-center">
-                <i class="fas fa-chart-line text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Corporate Event
-              </span>
-              <h3 class="text-xl font-bold mb-2">Annual Gala Dinner</h3>
-              <p class="text-gray-400 mb-4">Elegant gala dinner for corporate awards ceremony</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-          
-          <!-- Project 6 - Festival -->
-          <div class="portfolio-item group relative overflow-hidden rounded-2xl bg-gray-800" data-category="festival">
-            <div class="h-64 overflow-hidden">
-              <div class="h-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
-                <i class="fas fa-glass-cheers text-8xl text-white/20"></i>
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
-            <div class="p-6">
-              <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-medium mb-3">
-                Food Festival
-              </span>
-              <h3 class="text-xl font-bold mb-2">Culinary Food Festival</h3>
-              <p class="text-gray-400 mb-4">3-day food festival featuring 50+ restaurants and chefs</p>
-              <a href="#" class="text-cyan-400 font-medium hover:text-cyan-300 inline-flex items-center">
-                View Details
-                <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="text-center mt-12">
-          <a href="#" class="inline-flex items-center px-8 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300">
-            View All Projects
-            <i class="fas fa-arrow-right ml-2"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gray-800/30 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Client <span class="text-cyan-400">Testimonials</span>
-          </h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            What my clients say about my work
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Testimonial 1 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl">
-            <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                AS
-              </div>
-              <div>
-                <h4 class="font-bold text-lg">Ahmad Syah</h4>
-                <p class="text-gray-400 text-sm">CEO, TechCorp Indonesia</p>
-              </div>
-            </div>
-            <p class="text-gray-300 italic mb-4">
-              "Barnyster transformed our annual conference into an unforgettable experience. Their attention to detail and professional approach exceeded our expectations!"
-            </p>
-            <div class="flex text-yellow-400">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-          
-          <!-- Testimonial 2 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl">
-            <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                SR
-              </div>
-              <div>
-                <h4 class="font-bold text-lg">Sari Ratna</h4>
-                <p class="text-gray-400 text-sm">Wedding Client</p>
-              </div>
-            </div>
-            <p class="text-gray-300 italic mb-4">
-              "Our wedding was absolutely perfect thanks to Barnyster! They handled everything seamlessly and made our dream wedding come true."
-            </p>
-            <div class="flex text-yellow-400">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-          
-          <!-- Testimonial 3 -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl">
-            <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                DR
-              </div>
-              <div>
-                <h4 class="font-bold text-lg">Dewi Rahayu</h4>
-                <p class="text-gray-400 text-sm">Marketing Director, GlobalFest</p>
-              </div>
-            </div>
-            <p class="text-gray-300 italic mb-4">
-              "Working with Barnyster on our music festival was a game-changer. Their creativity and organizational skills are unmatched!"
-            </p>
-            <div class="flex text-yellow-400">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Get In <span class="text-cyan-400">Touch</span>
-          </h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Ready to create an unforgettable event? Let's discuss your ideas!
-          </p>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <!-- Contact Info -->
-          <div>
-            <h3 class="text-2xl font-bold mb-8">Contact Information</h3>
-            
-            <div class="space-y-8">
-              <div class="flex items-start">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
-                  <i class="fas fa-phone text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg mb-2">Call Me</h4>
-                  <p class="text-gray-400">+62 812 3456 7890</p>
-                  <p class="text-gray-400 text-sm">Mon-Fri from 9am to 6pm</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
-                  <i class="fas fa-envelope text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg mb-2">Email</h4>
-                  <p class="text-gray-400">hello@barnyster.com</p>
-                  <p class="text-gray-400 text-sm">I'll respond within 24 hours</p>
-                </div>
-              </div>
-              
-              <div class="flex items-start">
-                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
-                  <i class="fas fa-map-marker-alt text-xl"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-lg mb-2">Location</h4>
-                  <p class="text-gray-400">Jakarta, Indonesia</p>
-                  <p class="text-gray-400 text-sm">Available for projects worldwide</p>
-                </div>
-              </div>
+    <!-- ===== SERVICES SECTION ===== -->
+    <section id="services" class="py-20 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    My <span class="text-cyan-400">Services</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Comprehensive event management solutions tailored to your needs
+                </p>
             </div>
             
-            <div class="mt-12">
-              <h4 class="font-bold text-lg mb-6">Follow Me</h4>
-              <div class="flex space-x-4">
-                <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-500 transition-colors duration-300">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-300">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors duration-300">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-300">
-                  <i class="fab fa-youtube"></i>
-                </a>
-              </div>
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1: Event Planning -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-calendar-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Event Planning</h3>
+                    <p class="text-gray-400 mb-4">
+                        Comprehensive event planning from concept to execution with attention to every detail.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Concept Development
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Timeline Management
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Vendor Coordination
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2: Wedding Coordination -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-ring text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Wedding Coordination</h3>
+                    <p class="text-gray-400 mb-4">
+                        Creating dream weddings with personalized themes and flawless execution.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Theme Design
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Ceremony Planning
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Reception Management
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3: Corporate Events -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-briefcase text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Corporate Events</h3>
+                    <p class="text-gray-400 mb-4">
+                        Professional event management for businesses, conferences, and corporate gatherings.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Conference Planning
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Team Building
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Product Launches
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          
-          <!-- Contact Form -->
-          <div class="bg-gray-800/50 p-8 rounded-2xl">
-            <form id="contactForm" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="block text-gray-300 mb-2">Your Name</label>
-                  <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="John Doe">
+            
+            <!-- Additional Services -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <!-- Service 4 -->
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl hover-lift">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-music text-cyan-400"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">Music Festivals</h4>
+                    <p class="text-gray-400 text-sm">Large-scale music event organization</p>
                 </div>
-                <div>
-                  <label class="block text-gray-300 mb-2">Your Email</label>
-                  <input type="email" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="john@example.com">
+                
+                <!-- Service 5 -->
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl hover-lift">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-birthday-cake text-cyan-400"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">Private Parties</h4>
+                    <p class="text-gray-400 text-sm">Birthdays and special celebrations</p>
                 </div>
-              </div>
-              
-              <div>
-                <label class="block text-gray-300 mb-2">Subject</label>
-                <input type="text" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Event Inquiry">
-              </div>
-              
-              <div>
-                <label class="block text-gray-300 mb-2">Event Type</label>
-                <select class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors">
-                  <option value="">Select Event Type</option>
-                  <option value="wedding">Wedding</option>
-                  <option value="corporate">Corporate Event</option>
-                  <option value="festival">Festival/Concert</option>
-                  <option value="birthday">Birthday Party</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              
-              <div>
-                <label class="block text-gray-300 mb-2">Message</label>
-                <textarea rows="4" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Tell me about your event..."></textarea>
-              </div>
-              
-              <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300">
-                Send Message
-                <i class="fas fa-paper-plane ml-2"></i>
-              </button>
-            </form>
-          </div>
+                
+                <!-- Service 6 -->
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl hover-lift">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-video text-cyan-400"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">Virtual Events</h4>
+                    <p class="text-gray-400 text-sm">Online and hybrid event solutions</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 border-t border-gray-800">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-6 md:mb-0">
-            <a href="#" class="text-2xl font-bold">
-              <span class="text-cyan-400">B</span>arny<span class="text-cyan-400">ster</span>
-            </a>
-            <p class="text-gray-400 mt-2">Creating unforgettable experiences since 2019</p>
-          </div>
-          
-          <div class="flex space-x-6">
-            <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">Privacy Policy</a>
-            <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">Terms of Service</a>
-            <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">FAQ</a>
-          </div>
+    <!-- ===== PORTFOLIO SECTION ===== -->
+    <section id="portfolio" class="py-20 px-4 md:px-6 bg-gray-800/30">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    My <span class="text-cyan-400">Portfolio</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Showcase of successful events I've organized
+                </p>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 animate-fade-in-up">
+                <button class="portfolio-filter active px-5 py-2 bg-cyan-500 text-white rounded-full text-sm font-medium transition-all" data-filter="all">
+                    All Projects
+                </button>
+                <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="wedding">
+                    <i class="fas fa-ring mr-2"></i> Wedding
+                </button>
+                <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="corporate">
+                    <i class="fas fa-briefcase mr-2"></i> Corporate
+                </button>
+                <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="festival">
+                    <i class="fas fa-music mr-2"></i> Festival
+                </button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 - Wedding -->
+                <div class="portfolio-item group animate-fade-in-up" data-category="wedding">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                                <i class="fas fa-heart text-6xl text-white/30"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Wedding
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Beachfront Luxury Wedding</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Exclusive wedding ceremony with 300 guests at premium beach resort</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-users mr-2"></i>
+                                <span>300+ Guests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 - Corporate -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.1s" data-category="corporate">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
+                                <i class="fas fa-chart-line text-6xl text-white/30"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Corporate
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Tech Innovation Summit</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Annual technology conference with 100+ speakers</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-user-tie mr-2"></i>
+                                <span>2,000+ Participants</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Festival -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.2s" data-category="festival">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-yellow-600 to-orange-600 flex items-center justify-center">
+                                <i class="fas fa-guitar text-6xl text-white/30"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Festival
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Sunset Music Festival</h3>
+                            <p class="text-gray-400 mb-4 text-sm">3-day outdoor music festival with 50+ artists</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                <span>3 Days, 5,000+ Attendees</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 - Wedding -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.3s" data-category="wedding">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+                                <i class="fas fa-glass-cheers text-6xl text-white/30"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Wedding
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Garden Romance Wedding</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Intimate garden wedding with floral theme for 150 guests</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-leaf mr-2"></i>
+                                <span>Garden Theme, 150 Guests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 - Corporate -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.4s" data-category="corporate">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center">
+                                <i class="fas fa-trophy text-6xl text-white/30"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Corporate
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Annual Gala Dinner</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Elegant gala dinner for corporate awards ceremony</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-award mr-2"></i>
+                                <span>500+ Corporate Guests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 - Festival -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.5s" data-category="festival">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden">
+                            <div class="h-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-utensils text-6xl text-white/30"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Festival
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Culinary Food Festival</h3>
+                            <p class="text-gray-400 mb-4 text-sm">3-day food festival featuring 50+ restaurants</p>
+                            <div class="flex items-center text-cyan-400 text-sm">
+                                <i class="fas fa-cheese mr-2"></i>
+                                <span>50+ Restaurants, 3 Days</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Button -->
+            <div class="text-center mt-12 animate-fade-in-up">
+                <a href="#" class="inline-flex items-center px-8 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 hover-lift">
+                    View All Projects
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
         </div>
-        
-        <div class="text-center mt-8 pt-8 border-t border-gray-800">
-          <p class="text-gray-400">
-            © 2024 Barnyster. All rights reserved. | Designed with <i class="fas fa-heart text-red-500 mx-1"></i> for amazing events
-          </p>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact" class="py-20 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    Get In <span class="text-cyan-400">Touch</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Ready to create an unforgettable event? Let's discuss your ideas!
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="animate-fade-in-up">
+                    <h3 class="text-2xl font-bold mb-8">Contact Information</h3>
+                    
+                    <div class="space-y-8">
+                        <!-- Phone -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Call Me</h4>
+                                <p class="text-gray-400">+62 812 3456 7890</p>
+                                <p class="text-gray-400 text-sm">Mon-Fri from 9am to 6pm</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Email</h4>
+                                <p class="text-gray-400">hello@barnyster.com</p>
+                                <p class="text-gray-400 text-sm">Response within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Location -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Location</h4>
+                                <p class="text-gray-400">Jakarta, Indonesia</p>
+                                <p class="text-gray-400 text-sm">Available for projects worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="mt-12">
+                        <h4 class="font-bold text-lg mb-6">Connect With Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-500 transition-colors duration-300 hover-lift">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-300 hover-lift">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors duration-300 hover-lift">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-300 hover-lift">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="animate-fade-in-up" style="animation-delay: 0.2s">
+                    <div class="glass-effect rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-2">Send a Message</h3>
+                        <p class="text-gray-400 mb-8">Let me know about your event ideas</p>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-300 mb-2 text-sm">Your Name *</label>
+                                    <input type="text" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-300 mb-2 text-sm">Your Email *</label>
+                                    <input type="email" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="john@example.com">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-300 mb-2 text-sm">Event Type</label>
+                                <select class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors">
+                                    <option value="">Select Event Type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="festival">Festival/Concert</option>
+                                    <option value="birthday">Birthday Party</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-300 mb-2 text-sm">Event Date (if known)</label>
+                                <input type="date" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-300 mb-2 text-sm">Message *</label>
+                                <textarea rows="4" required class="w-full bg-gray-900 border border-gray-700 rounded-xl px-6 py-3 focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Tell me about your event vision, budget, and expectations..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 hover-lift">
+                                <i class="fas fa-paper-plane mr-2"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-8 border-t border-gray-800 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- Brand -->
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <a href="#home" class="text-2xl font-bold">
+                        <span class="text-cyan-400">B</span>arny<span class="text-cyan-400">ster</span>
+                    </a>
+                    <p class="text-gray-400 mt-2 text-sm">Creating unforgettable experiences since 2019</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="#home" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">About</a>
+                    <a href="#services" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Services</a>
+                    <a href="#portfolio" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Portfolio</a>
+                    <a href="#contact" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">Contact</a>
+                </div>
+                
+                <!-- Social Icons -->
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-300 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="text-center mt-8 pt-8 border-t border-gray-800">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Barnyster. All rights reserved. | Designed with <i class="fas fa-heart text-red-500 mx-1"></i> for amazing events
+                </p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-cyan-500 text-white rounded-full shadow-lg hover:bg-cyan-600 transition-colors duration-300 hidden">
-      <i class="fas fa-arrow-up"></i>
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-cyan-500 text-white rounded-full shadow-lg hover:bg-cyan-600 transition-colors duration-300 hidden z-50 hover-lift">
+        <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script type="module" src="/src/main.ts"></script>
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-      // Mobile menu toggle
-      document.getElementById('menu-toggle').addEventListener('click', function() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      });
-      
-      // Back to top button
-      const backToTopButton = document.getElementById('backToTop');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-          backToTopButton.classList.remove('hidden');
-        } else {
-          backToTopButton.classList.add('hidden');
-        }
-      });
-      
-      backToTopButton.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
-          
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            // Close mobile menu if open
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.add('hidden');
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Portfolio website loaded successfully!');
             
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-      
-      // Form submission
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your message! I will get back to you within 24 hours.');
-        this.reset();
-      });
-      
-      // Portfolio filter functionality
-      document.querySelectorAll('.filter-btn').forEach(button => {
-        button.addEventListener('click', function() {
-          // Remove active class from all buttons
-          document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active', 'bg-cyan-500', 'text-white');
-            btn.classList.add('bg-gray-800', 'text-gray-300');
-          });
-          
-          // Add active class to clicked button
-          this.classList.remove('bg-gray-800', 'text-gray-300');
-          this.classList.add('active', 'bg-cyan-500', 'text-white');
-          
-          const filterValue = this.getAttribute('data-filter');
-          
-          // Filter portfolio items
-          document.querySelectorAll('.portfolio-item').forEach(item => {
-            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-              item.style.display = 'block';
-              setTimeout(() => {
-                item.style.opacity = '1';
-              }, 10);
-            } else {
-              item.style.opacity = '0';
-              setTimeout(() => {
-                item.style.display = 'none';
-              }, 300);
+            // ===== MOBILE MENU TOGGLE =====
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target) && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
             }
-          });
+            
+            // ===== SMOOTH SCROLLING =====
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                        
+                        // Calculate position with offset for fixed nav
+                        const navHeight = 80;
+                        const targetPosition = targetElement.offsetTop - navHeight;
+                        
+                        // Smooth scroll
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // ===== BACK TO TOP BUTTON =====
+            const backToTopButton = document.getElementById('backToTop');
+            
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('hidden');
+                    } else {
+                        backToTopButton.classList.add('hidden');
+                    }
+                });
+                
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // ===== ANIMATE COUNTERS =====
+            function animateCounter(elementId, target, suffix = '', duration = 2000) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+                
+                let current = 0;
+                const increment = target / (duration / 16); // 60fps
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current) + suffix;
+                }, 16);
+            }
+            
+            // Start counter animations when page loads
+            setTimeout(() => {
+                animateCounter('eventsCounter', 47, '+');
+                animateCounter('satisfactionCounter', 94, '%');
+                animateCounter('experienceCounter', 4, '+');
+            }, 500);
+            
+            // ===== PORTFOLIO FILTER =====
+            const portfolioFilters = document.querySelectorAll('.portfolio-filter');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            portfolioFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remove active class from all filters
+                    portfolioFilters.forEach(f => f.classList.remove('active', 'bg-cyan-500', 'text-white'));
+                    portfolioFilters.forEach(f => f.classList.add('bg-gray-800', 'text-gray-300'));
+                    
+                    // Add active class to clicked filter
+                    this.classList.remove('bg-gray-800', 'text-gray-300');
+                    this.classList.add('active', 'bg-cyan-500', 'text-white');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter portfolio items
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // ===== ANIMATE PROGRESS BARS =====
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+            
+            // ===== FORM VALIDATION =====
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = this.querySelector('input[type="text"]').value;
+                    const email = this.querySelector('input[type="email"]').value;
+                    const message = this.querySelector('textarea').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !message) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Success message
+                        alert('Thank you for your message! I will get back to you within 24 hours.');
+                        
+                        // Reset form
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 1500);
+                });
+            }
+            
+            // ===== ANIMATE ELEMENTS ON SCROLL =====
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.animate-fade-in-up');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+            
+            // Initial check
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // ===== TYPING EFFECT FOR HERO TEXT =====
+            const heroText = document.querySelector('#home h1 .gradient-text');
+            if (heroText) {
+                const text = "Barnyster!!";
+                let i = 0;
+                
+                function typeWriter() {
+                    if (i < text.length) {
+                        heroText.textContent = text.substring(0, i + 1) + "|";
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    } else {
+                        heroText.textContent = text;
+                    }
+                }
+                
+                // Start typing effect
+                setTimeout(typeWriter, 1000);
+            }
         });
-      });
-      
-      // Counter animation
-      function animateCounter(elementId, target, suffix = '') {
-        const element = document.getElementById(elementId);
-        if (!element) return;
-        
-        let current = 0;
-        const increment = target / 50; // Animate over 50 steps
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-          element.textContent = Math.floor(current) + suffix;
-        }, 40);
-      }
-      
-      // Animate counters when page loads
-      window.addEventListener('load', function() {
-        setTimeout(() => {
-          animateCounter('eventsCounter', 50, '+');
-          animateCounter('satisfactionCounter', 100, '%');
-          animateCounter('experienceCounter', 5, '+');
-        }, 500);
-      });
     </script>
-  </body>
+</body>
 </html>
