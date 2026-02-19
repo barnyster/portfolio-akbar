@@ -179,6 +179,19 @@
         .tiktok-bg {
             background: linear-gradient(135deg, #000000 0%, #333333 100%);
         }
+
+        /* Portfolio Filter Active State */
+        .portfolio-filter.active {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
@@ -538,6 +551,81 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Service 4: Birthday Parties -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.4s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-birthday-cake text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Birthday Parties</h3>
+                    <p class="text-gray-400 mb-4">
+                        Fun and creative birthday celebrations for all ages with unique themes.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Theme Parties
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Kids Entertainment
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Surprise Planning
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 5: Festival Management -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.5s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-music text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Festival Management</h3>
+                    <p class="text-gray-400 mb-4">
+                        Large-scale festival organization with multiple stages and attractions.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Stage Management
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Artist Coordination
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Crowd Control
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 6: Private Parties -->
+                <div class="glass-effect p-8 rounded-2xl hover-lift animate-fade-in-up" style="animation-delay: 0.6s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-glass-cheers text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Private Parties</h3>
+                    <p class="text-gray-400 mb-4">
+                        Intimate and exclusive private events with personalized attention.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Venue Selection
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Catering Services
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i class="fas fa-check text-cyan-400 mr-2 text-sm"></i>
+                            Entertainment Booking
+                        </li>
+                    </ul>
+                </div>
             </div>
             
             <!-- Quick Contact CTA -->
@@ -570,37 +658,45 @@
                     My <span class="text-cyan-400">Portfolio</span>
                 </h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">
-                    Showcase of successful events I've organized
+                    Showcase of 50+ successful events I've organized
                 </p>
+                <div class="mt-4 inline-block px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold">
+                    <i class="fas fa-calendar-check mr-2"></i>50+ Events Completed
+                </div>
             </div>
             
             <!-- Portfolio Filter -->
             <div class="flex flex-wrap justify-center gap-3 mb-12 animate-fade-in-up">
                 <button class="portfolio-filter active px-5 py-2 bg-cyan-500 text-white rounded-full text-sm font-medium transition-all" data-filter="all">
-                    All Projects
+                    All Projects (50+)
                 </button>
                 <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="wedding">
-                    <i class="fas fa-ring mr-2"></i> Wedding
+                    <i class="fas fa-ring mr-2"></i> Wedding (15+)
                 </button>
                 <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="corporate">
-                    <i class="fas fa-briefcase mr-2"></i> Corporate
+                    <i class="fas fa-briefcase mr-2"></i> Corporate (20+)
                 </button>
                 <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="festival">
-                    <i class="fas fa-music mr-2"></i> Festival
+                    <i class="fas fa-music mr-2"></i> Festival (8+)
+                </button>
+                <button class="portfolio-filter px-5 py-2 bg-gray-800 text-gray-300 rounded-full text-sm font-medium hover:bg-gray-700 transition-all" data-filter="birthday">
+                    <i class="fas fa-birthday-cake mr-2"></i> Birthday (10+)
                 </button>
             </div>
             
-            <!-- Portfolio Grid -->
+            <!-- Portfolio Grid - 9 Featured Projects -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Project 1 - Wedding -->
+                <!-- Wedding Projects (3) -->
+                
+                <!-- Project 1 - Luxury Wedding -->
                 <div class="portfolio-item group animate-fade-in-up" data-category="wedding">
                     <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
-                        <div class="h-48 overflow-hidden">
-                            <div class="h-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
-                                <i class="fas fa-heart text-6xl text-white/30"></i>
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center relative">
+                            <i class="fas fa-heart text-6xl text-white/30"></i>
+                            <div class="absolute top-2 right-2 bg-white/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
+                                Featured
                             </div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
@@ -611,21 +707,76 @@
                             </div>
                             <h3 class="text-xl font-bold mb-2">Beachfront Luxury Wedding</h3>
                             <p class="text-gray-400 mb-4 text-sm">Exclusive wedding ceremony with 300 guests at premium beach resort</p>
-                            <div class="flex items-center text-cyan-400 text-sm">
-                                <i class="fas fa-users mr-2"></i>
-                                <span>300+ Guests</span>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>300+ Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Bali</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 2 - Corporate -->
-                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.1s" data-category="corporate">
+                <!-- Project 2 - Garden Wedding -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.1s" data-category="wedding">
                     <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
-                        <div class="h-48 overflow-hidden">
-                            <div class="h-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
-                                <i class="fas fa-chart-line text-6xl text-white/30"></i>
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center">
+                            <i class="fas fa-leaf text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Wedding
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
                             </div>
+                            <h3 class="text-xl font-bold mb-2">Garden Elegance Wedding</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Romantic garden wedding with 200 guests in botanical garden</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>200 Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Bandung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 - Traditional Wedding -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.2s" data-category="wedding">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center">
+                            <i class="fas fa-crown text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Wedding
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Traditional Javanese Wedding</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Cultural wedding with traditional ceremonies and 500 guests</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>500 Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Yogyakarta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Corporate Projects (3) -->
+                
+                <!-- Project 4 - Tech Summit -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.3s" data-category="corporate">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-6xl text-white/30"></i>
                         </div>
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
@@ -634,23 +785,78 @@
                                 </span>
                                 <span class="text-gray-400 text-sm">2023</span>
                             </div>
-                            <h3 class="text-xl font-bold mb-2">Tech Innovation Summit</h3>
-                            <p class="text-gray-400 mb-4 text-sm">Annual technology conference with 100+ speakers</p>
-                            <div class="flex items-center text-cyan-400 text-sm">
-                                <i class="fas fa-user-tie mr-2"></i>
-                                <span>2,000+ Participants</span>
+                            <h3 class="text-xl font-bold mb-2">Tech Innovation Summit 2023</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Annual technology conference with 100+ speakers and 2,000+ participants</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-user-tie mr-2"></i>
+                                    <span>2,000+ Participants</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Jakarta</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 3 - Festival -->
-                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.2s" data-category="festival">
+                <!-- Project 5 - Product Launch -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.4s" data-category="corporate">
                     <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
-                        <div class="h-48 overflow-hidden">
-                            <div class="h-full bg-gradient-to-br from-yellow-600 to-orange-600 flex items-center justify-center">
-                                <i class="fas fa-guitar text-6xl text-white/30"></i>
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-rocket text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Corporate
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
                             </div>
+                            <h3 class="text-xl font-bold mb-2">Flagship Product Launch</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Global product launch event for leading tech company</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-globe mr-2"></i>
+                                    <span>1,500+ Attendees</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Singapore</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 - Annual Gala -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.5s" data-category="corporate">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-yellow-600 to-amber-600 flex items-center justify-center">
+                            <i class="fas fa-trophy text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Corporate
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Corporate Excellence Gala</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Award ceremony with 800 executives and live entertainment</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-star mr-2"></i>
+                                    <span>800 Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Kuala Lumpur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Festival Projects (2) -->
+                
+                <!-- Project 7 - Music Festival -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.6s" data-category="festival">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-pink-600 to-red-600 flex items-center justify-center">
+                            <i class="fas fa-guitar text-6xl text-white/30"></i>
                         </div>
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
@@ -660,20 +866,176 @@
                                 <span class="text-gray-400 text-sm">2024</span>
                             </div>
                             <h3 class="text-xl font-bold mb-2">Sunset Music Festival</h3>
-                            <p class="text-gray-400 mb-4 text-sm">3-day outdoor music festival with 50+ artists</p>
-                            <div class="flex items-center text-cyan-400 text-sm">
-                                <i class="fas fa-calendar-alt mr-2"></i>
-                                <span>3 Days, 5,000+ Attendees</span>
+                            <p class="text-gray-400 mb-4 text-sm">3-day outdoor music festival with 50+ international artists</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-calendar-alt mr-2"></i>
+                                    <span>3 Days, 5,000+ Daily</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Bali</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 8 - Food Festival -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.7s" data-category="festival">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-orange-600 to-yellow-600 flex items-center justify-center">
+                            <i class="fas fa-utensils text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Festival
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">International Food Festival</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Culinary event featuring 100+ vendors and 20,000 visitors</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-utensils mr-2"></i>
+                                    <span>100+ Vendors</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Jakarta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Birthday Projects (2) -->
+                
+                <!-- Project 9 - Kids Birthday -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.8s" data-category="birthday">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center">
+                            <i class="fas fa-birthday-cake text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Birthday
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Superhero Themed Party</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Spectacular 7th birthday with 150 kids and entertainment</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-child mr-2"></i>
+                                    <span>150 Kids</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Surabaya</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 10 - Sweet 17 -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 0.9s" data-category="birthday">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-pink-400 to-rose-400 flex items-center justify-center">
+                            <i class="fas fa-star text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Birthday
+                                </span>
+                                <span class="text-gray-400 text-sm">2023</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Sweet 17 Hollywood Party</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Glamorous 17th birthday with red carpet theme</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-camera mr-2"></i>
+                                    <span>200 Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Jakarta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 11 - Anniversary -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 1.0s" data-category="birthday">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-gold-600 to-yellow-600 flex items-center justify-center">
+                            <i class="fas fa-heart text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Birthday
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">50th Anniversary Celebration</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Golden anniversary party with 300 family and friends</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-users mr-2"></i>
+                                    <span>300 Guests</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Bandung</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 12 - New Year Eve -->
+                <div class="portfolio-item group animate-fade-in-up" style="animation-delay: 1.1s" data-category="festival">
+                    <div class="bg-gray-800 rounded-2xl overflow-hidden hover-lift">
+                        <div class="h-48 overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
+                            <i class="fas fa-clock text-6xl text-white/30"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium">
+                                    Festival
+                                </span>
+                                <span class="text-gray-400 text-sm">2024</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">New Year's Eve Countdown</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Massive NYE celebration with fireworks and live music</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-cyan-400 text-sm">
+                                    <i class="fas fa-fireworks mr-2"></i>
+                                    <span>10,000+ Attendees</span>
+                                </div>
+                                <span class="text-xs text-gray-500">📍 Jakarta</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <!-- Stats Summary -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-up">
+                <div class="text-center p-4 bg-gray-800/50 rounded-xl">
+                    <div class="text-2xl font-bold text-cyan-400">15+</div>
+                    <div class="text-gray-400 text-sm">Weddings</div>
+                </div>
+                <div class="text-center p-4 bg-gray-800/50 rounded-xl">
+                    <div class="text-2xl font-bold text-cyan-400">20+</div>
+                    <div class="text-gray-400 text-sm">Corporate Events</div>
+                </div>
+                <div class="text-center p-4 bg-gray-800/50 rounded-xl">
+                    <div class="text-2xl font-bold text-cyan-400">8+</div>
+                    <div class="text-gray-400 text-sm">Festivals</div>
+                </div>
+                <div class="text-center p-4 bg-gray-800/50 rounded-xl">
+                    <div class="text-2xl font-bold text-cyan-400">10+</div>
+                    <div class="text-gray-400 text-sm">Birthday Parties</div>
+                </div>
+            </div>
+            
             <!-- View All Button -->
             <div class="text-center mt-12 animate-fade-in-up">
                 <a href="#contact" class="inline-flex items-center px-8 py-3 border-2 border-cyan-500 text-cyan-400 font-semibold rounded-full hover:bg-cyan-500 hover:text-white transition-all duration-300 hover-lift">
-                    View All Projects
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    Book Your Event Now
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -681,7 +1043,7 @@
     </section>
 
     <!-- ===== CONTACT SECTION ===== -->
-    <section id="contact" class="py-20 px-4 md:px-6 bg-gray-800/30">
+    <section id="contact" class="py-20 px-4 md:px-6">
         <div class="max-w-7xl mx-auto">
             <!-- Section Header -->
             <div class="text-center mb-16 animate-fade-in-up">
@@ -882,6 +1244,9 @@
                     <a href="tel:6289626126528" class="text-cyan-400 hover:text-cyan-300">+62 896 2612 6528</a> | 
                     <a href="mailto:muhamadnurakbar28@gmail.com" class="text-cyan-400 hover:text-cyan-300">muhamadnurakbar28@gmail.com</a>
                 </p>
+                <p class="text-gray-500 text-xs mt-2">
+                    <i class="fas fa-calendar-check mr-1"></i> 50+ Events Successfully Organized
+                </p>
             </div>
         </div>
     </footer>
@@ -995,8 +1360,10 @@
                 portfolioFilters.forEach(filter => {
                     filter.addEventListener('click', function() {
                         // Remove active class from all filters
-                        portfolioFilters.forEach(f => f.classList.remove('active', 'bg-cyan-500', 'text-white'));
-                        portfolioFilters.forEach(f => f.classList.add('bg-gray-800', 'text-gray-300'));
+                        portfolioFilters.forEach(f => {
+                            f.classList.remove('active', 'bg-cyan-500', 'text-white');
+                            f.classList.add('bg-gray-800', 'text-gray-300');
+                        });
                         
                         // Add active class to clicked filter
                         this.classList.remove('bg-gray-800', 'text-gray-300');
@@ -1018,6 +1385,13 @@
                                 }, 300);
                             }
                         });
+                        
+                        // Show filter count
+                        const visibleCount = Array.from(portfolioItems).filter(
+                            item => filterValue === 'all' || item.getAttribute('data-category') === filterValue
+                        ).length;
+                        
+                        console.log(`Showing ${visibleCount} projects`);
                     });
                 });
             }
